@@ -52,9 +52,9 @@ public class All {
             try {
                 nxtComm = NXTCommFactory.createNXTComm(NXTCommFactory.BLUETOOTH);
                 connLabel.setText(waiting);
-                NXTInfo nxtList[] = nxtComm.search("NXT");
+                NXTInfo nxtList[] = nxtComm.search("LEGO_06");
                 System.out.println("search start:");
-                while(search){
+                /*while(search){
                     if(nxtList.length != 0){
                         for(int i = 0; i < nxtList.length; i++) {
                             System.out.println("Device found: ");
@@ -69,8 +69,9 @@ public class All {
                     } else
                         System.out.println("no device " + nxtList.toString());
                     if(search)
-                        nxtList = nxtComm.search("NXT");
-                }
+                        nxtList = nxtComm.search("LEGO_06");
+                }*/
+                brick = new NXTInfo(nxtList[0].protocol, nxtList[0].name, nxtList[0].deviceAddress);
 
                 nxtComm.open(brick);
                 connLabel.setText(connected);
