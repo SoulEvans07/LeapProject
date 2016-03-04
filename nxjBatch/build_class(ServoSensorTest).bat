@@ -1,0 +1,2 @@
+nxjc ServoSensorTest.java
+build&upload_nxj

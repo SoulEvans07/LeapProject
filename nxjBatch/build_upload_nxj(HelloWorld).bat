@@ -1,0 +1,1 @@
+nxj -r -o HelloWorld.nxj HelloWorld

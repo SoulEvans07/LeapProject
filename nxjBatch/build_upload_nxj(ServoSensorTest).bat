@@ -1,0 +1,1 @@
+nxj -r -o ServoSensorTest.nxj ServoSensorTest
