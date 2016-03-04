@@ -16,6 +16,8 @@ public class Reciever {
     public static String waiting = "Waiting...";
     public static String closing = "Closing...";
 
+    public static char prev = "";
+
     public static void main(String[] args){
         NXTMotor motrA = new NXTMotor(MotorPort.A);
         NXTMotor motrB = new NXTMotor(MotorPort.B);
@@ -47,7 +49,7 @@ public class Reciever {
     }
 
     public void processSemiFlow(char c){
-        static char prev = c;
+        prev = c;
         try{
             switch (c) {
                 case 'w':   // motorB forward

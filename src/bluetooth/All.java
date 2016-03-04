@@ -113,6 +113,7 @@ public class All {
                 connLabel.setText(closing);
                 try {
                     open = false;
+                    System.out.println();
                     nxtComm.close();
                 } catch (IOException e1) {
                     System.out.println("[Error] IOError \t" + e);
