@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="leJOS PC" level="application" />
-    <orderEntry type="library" name="leJOS BlueCove" level="application" />
+    <orderEntry type="library" exported="" name="leJOS PC" level="application" />
+    <orderEntry type="library" exported="" name="leJOS BlueCove" level="application" />
   </component>
 </module>

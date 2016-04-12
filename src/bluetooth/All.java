@@ -10,8 +10,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class All {
     public static void main(String[] args){
@@ -23,7 +24,7 @@ public class All {
     }
 
     public static class KeyFunc extends JFrame {
-        public static String nxt_name = "LEGO_14";
+        public static String nxt_name = "LEGO_06";
         public static String connected = "Connected";
         public static String waiting = "Waiting...";
         public static String closing = "Closing...";
@@ -52,8 +53,8 @@ public class All {
             try {
                 nxtComm = NXTCommFactory.createNXTComm(NXTCommFactory.BLUETOOTH);
                 connLabel.setText(waiting);
-                NXTInfo nxtList[] = nxtComm.search("LEGO_06");
                 System.out.println("search start:");
+                NXTInfo nxtList[] = nxtComm.search(nxt_name);
                 /*while(search){
                     if(nxtList.length != 0){
                         for(int i = 0; i < nxtList.length; i++) {
@@ -74,13 +75,14 @@ public class All {
                 brick = new NXTInfo(nxtList[0].protocol, nxtList[0].name, nxtList[0].deviceAddress);
 
                 nxtComm.open(brick);
+
                 connLabel.setText(connected);
+                open = true;
+                this.addKeyListener(new KeyList());
 
             } catch (NXTCommException e) {
                 System.out.println("[Error] NXTComError \t" + e);
             }
-
-            this.addKeyListener(new KeyList());
         }
 
         public void initPanel(){
@@ -94,14 +96,16 @@ public class All {
         public class KeyList extends KeyAdapter {
             @Override
             public void keyPressed(KeyEvent e){
-                System.out.print(e.getKeyChar());
                 if(open) {
-                    DataOutputStream dataOut = (DataOutputStream) nxtComm.getOutputStream();
-
+                    System.out.print(e.getKeyChar());
+                    OutputStream dataOut = nxtComm.getOutputStream();
+                    OutputStreamWriter writer = new OutputStreamWriter(dataOut);
                     try {
-                        dataOut.writeChar(e.getKeyChar());
+                        dataOut.write(e.getKeyChar());
+                        dataOut.write(e.getKeyChar());
+                        dataOut.flush();
                     } catch (IOException e1) {
-                        System.out.println("[Error] IOError \t" + e1 + "\n char: " + e);
+                        System.out.println("[Error] IOError \t" + e1 + "\n char: " + e.getKeyChar());
                     }
                 }
             }
