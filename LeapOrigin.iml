@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="leJOS PC" level="application" />
     <orderEntry type="library" exported="" name="leJOS BlueCove" level="application" />
+    <orderEntry type="library" exported="" name="LeapJava" level="application" />
   </component>
 </module>

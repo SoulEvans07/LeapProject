@@ -1,1 +1,0 @@
-nxjpc All.class

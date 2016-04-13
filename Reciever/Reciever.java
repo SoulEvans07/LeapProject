@@ -4,13 +4,15 @@ import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.NXTConnection;
+import lejos.util.Delay;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.lang.System;
 
 public class Reciever {
-    public static final int pow = 90;
+    public static final int pow = 60;
+    public static final int lowPow = 40;
     public static boolean check = false;
 
     public static String connected = "Connected";
@@ -44,13 +46,13 @@ public class Reciever {
         System.out.println();
         System.out.println("startedStream:\n");
         while (!stop) {
-            backPressed();
             try {
                 //processSemiFlow(dataIn.readChar());
                 processFullStop(dataIn.readChar());
                 //System.out.println("run " + stop + "\n");
             } catch (IOException e) {
                 System.out.print("\n[Error] IOError 	" + e.getMessage());
+                stop = true;
             }
         }
         System.out.println("\nSTOP!");
@@ -114,44 +116,64 @@ public class Reciever {
 
     public static void processFullStop(char c) {
         int i = c;
-        System.out.print(c + " int: " + i + "\n");
+        //System.out.print(c + " int: " + i + "\n");
         switch (i) {
             case 30583: //'w':
                 motorB.setPower(pow);
                 motorB.forward();
-                System.out.print(c + ('A' - 'a'));
+                System.out.print("w");
                 break;
             case 29555: //'s':
-                motorB.setPower(pow);
+                motorB.setPower(lowPow);
                 motorB.backward();
-                System.out.print(c + ('A' - 'a'));
+                System.out.print("s");
                 break;
             case 24929: //'a':
                 motorA.setPower(pow);
                 motorA.backward();
-                System.out.print(c + ('A' - 'a'));
+                System.out.print("a");
                 break;
             case 25700: //'d':
                 motorA.setPower(pow);
                 motorA.forward();
-                System.out.print(c + ('A' - 'a'));
+                System.out.print("d");
                 break;
             case 8224: //' ':
                 motorC.setPower(pow);
                 if (clawOpen) {
                     motorC.backward();
+                    Delay.msDelay(600);
+                    clawOpen = !clawOpen;
+                    System.out.print("\nclose\n");
                 } else {
                     motorC.forward();
+                    Delay.msDelay(600);
+                    clawOpen = !clawOpen;
+                    System.out.print("\nopen\n");
                 }
+                break;
+            case 30840: // 'x'
+                motorC.setPower(lowPow);
+                motorC.forward();
+                System.out.print("\nopen\n");
+                break;
+            case 31097: // 'y'
+                motorC.setPower(lowPow);
+                motorC.backward();
+                System.out.print("\nclose\n");
+                break;
+            case 11565: // '-'
+                stop = true;
                 break;
             case 11822: //'.':
                 motorA.stop();
                 motorB.stop();
                 motorC.stop();
-                System.out.print(c + ('A' - 'a'));
+                System.out.print(".");
                 break;
             default:
-                System.out.println("\nerr: " + c);
+                System.out.println("\nerr: " + c + " int: " + i + "\n");
+                stop = true;
                 break;
         }
     }
