@@ -147,8 +147,8 @@ public class KeyFunc extends JFrame {
                     open = false;
                     System.out.println();
                     nxtComm.close();
+                    controller.removeListener(listener);
                 }
-                controller.removeListener(listener);
             } catch (IOException e1) {
                 System.out.println("[Error] IOError \t" + e);
             }

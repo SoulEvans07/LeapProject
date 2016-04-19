@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LeapOrigin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LeapOrigin_jar</output-path>
+    <root id="archive" name="LeapOrigin.jar">
+      <element id="module-output" name="LeapOrigin" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/charting.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/jtools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/pccomm.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/pctools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/bluecove/bluecove-2.1.1-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/bluecove/bluecove-bluez-2.1.1-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/bluecove/bluecove-emu-2.1.1-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../leJOS NXJ/lib/pc/bluecove/bluecove-gpl-2.1.1-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/LeapSDK/lib/LeapJava.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

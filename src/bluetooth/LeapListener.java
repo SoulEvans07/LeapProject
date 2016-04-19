@@ -39,6 +39,7 @@ public class LeapListener extends Listener {
 
         if(frame.hands().count() != 0) {
             firstHand = frame.hands().get(0);
+            boolean valid = firstHand.fingers().extended().count() != 0;
             //secondHand = frame.hands().get(1);
             //System.out.println(secondHand.toString());
             //System.out.println(secondHand.palmPosition());
@@ -97,15 +98,15 @@ public class LeapListener extends Listener {
 //                System.out.print("max " + max.toString() + "\n");
             }
 
-            if(!started && -100 < x && x < 100 && 200 < y && y < 400)
+            if(!started && -100 < x && x < 100 && 200 < y && y < 400 && -80 < z && z < 80)
                 started = true;
 
-            if(started) {
+            if(started && valid) {
                 if (x < -100)
-                    send('a');
-                else if (x > 100)
                     send('d');
-                else if (y > 400)
+                else if (x > 100)
+                    send('a');
+                else if (y > 350)
                     send('w');
                 else if (y < 200)
                     send('s');
@@ -115,14 +116,15 @@ public class LeapListener extends Listener {
                     send('y');
                 else
                     send('.');
-            }
+            } else
+                send('.');
 
 
             //System.out.print(palm.toString() + "\n");
             //if(clawDist > 0)
             //    System.out.print(clawDist + "\n");
             try {
-                Thread.sleep(500);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
