@@ -4,11 +4,9 @@ import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.NXTConnection;
-import lejos.util.Delay;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.lang.System;
 
 public class Reciever {
     public static final int pow = 60;
@@ -118,49 +116,33 @@ public class Reciever {
         int i = c;
         //System.out.print(c + " int: " + i + "\n");
         switch (i) {
-            case 30583: //'w':
-                motorB.setPower(pow);
-                motorB.forward();
-                System.out.print("w");
-                break;
-            case 29555: //'s':
-                motorB.setPower(lowPow);
-                motorB.backward();
-                System.out.print("s");
-                break;
             case 24929: //'a':
                 motorA.setPower(pow);
+                motorC.setPower(pow);
                 motorA.backward();
+                motorC.forward();
                 System.out.print("a");
                 break;
             case 25700: //'d':
                 motorA.setPower(pow);
+                motorC.setPower(pow);
                 motorA.forward();
+                motorC.backward();
                 System.out.print("d");
                 break;
-            case 8224: //' ':
+            case 30840: // 'w'
+                motorA.setPower(pow);
                 motorC.setPower(pow);
-                if (clawOpen) {
-                    motorC.backward();
-                    Delay.msDelay(600);
-                    clawOpen = !clawOpen;
-                    System.out.print("\nclose\n");
-                } else {
-                    motorC.forward();
-                    Delay.msDelay(600);
-                    clawOpen = !clawOpen;
-                    System.out.print("\nopen\n");
-                }
-                break;
-            case 30840: // 'x'
-                motorC.setPower(lowPow);
+                motorA.forward();
                 motorC.forward();
-                System.out.print("\nopen\n");
+                System.out.print("w");
                 break;
-            case 31097: // 'y'
-                motorC.setPower(lowPow);
+            case 31097: // 's'
+                motorA.setPower(pow);
+                motorC.setPower(pow);
+                motorA.backward();
                 motorC.backward();
-                System.out.print("\nclose\n");
+                System.out.print("s");
                 break;
             case 11565: // '-'
                 stop = true;

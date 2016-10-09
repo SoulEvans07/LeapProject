@@ -143,7 +143,7 @@ public class KeyFunc extends JFrame {
                     finalOut.write('-');
                     finalOut.flush();
 
-                    // kapcsolatbont·s
+                    // kapcsolatbont√°s
                     open = false;
                     System.out.println();
                     nxtComm.close();

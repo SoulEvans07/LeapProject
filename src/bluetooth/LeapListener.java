@@ -1,14 +1,17 @@
 package bluetooth;
 
 import com.leapmotion.leap.*;
+import com.leapmotion.leap.Frame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 
 public class LeapListener extends Listener {
     JLabel text;
     OutputStream out;
+    Robot test;
 
     float maxX, maxY, maxZ;
     float minX, minY, minZ;
@@ -96,23 +99,32 @@ public class LeapListener extends Listener {
                 maxZ = z;
 //                System.out.print("min " + min.toString() + " ");
 //                System.out.print("max " + max.toString() + "\n");
+
             }
 
-            if(!started && -100 < x && x < 100 && 200 < y && y < 400 && -80 < z && z < 80)
+            int down = 200;
+            int up = 350;
+            int left = 100;
+            int right = -100;
+            int forw = 100;
+            int back = -80;
+
+            if(!started && right < x && x < left && down < y && y < up && back < z && z < forw)
                 started = true;
 
+
             if(started && valid) {
-                if (x < -100)
+                if (x < right)
                     send('d');
-                else if (x > 100)
+                else if (x > left)
                     send('a');
-                else if (y > 350)
+                else if (y > up)
                     send('w');
-                else if (y < 200)
+                else if (y < down)
                     send('s');
-                else if(z > 100)
+                else if(z > forw)
                     send('x');
-                else if(z < -80)
+                else if(z < back)
                     send('y');
                 else
                     send('.');
@@ -124,7 +136,7 @@ public class LeapListener extends Listener {
             //if(clawDist > 0)
             //    System.out.print(clawDist + "\n");
             try {
-                Thread.sleep(300);
+                Thread.sleep(17);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
